@@ -1,30 +1,35 @@
 package com.chai.cache.store;
 
-import com.chai.cache.common.Cache;
-
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by chaishipeng on 2017/2/9.
  */
-public class HashMapKvStore implements KVStore<Cache> {
+public class HashMapKvStore<T> implements KVStore<T> {
+
+    private Map<String, T> map = new HashMap();
+
     @Override
-    public Cache get(String key) {
-        return null;
+    public T get(String key) {
+        return map.get(key);
     }
 
     @Override
-    public boolean put(String key, Cache o) {
+    public boolean put(String key, T o) {
+        map.put(key, o);
         return false;
     }
 
     @Override
-    public List<Cache> values() {
-        return null;
+    public List<T> values() {
+        return new ArrayList<T>(map.values());
     }
 
     @Override
     public void remove(String key) {
-
+        map.remove(key);
     }
 }
